@@ -1,180 +1,65 @@
-// import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-// import { AbilityScoresArrayComponent } from './ability-scores-array.component';
-// import { MockStore, provideMockStore } from '@ngrx/store/testing';
-// import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-// import { AbilityScoresSelectorComponent } from '../ability-scores-selector/ability-scores-selector.component';
-// import { selectAvailablePoints, selectChaAbilityBonus, selectConAbilityBonus, selectCurrentAbilityBonuses, selectDexAbilityBonus, selectIntAbilityBonus, selectStrAbilityBonus, selectWisAbilityBonus } from '../../store/draft-character-state/draft-character.selectors';
-// import { draftCharacterActions } from '../../store/draft-character-state/draft-character.actions';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AbilityScoresArrayComponent } from './ability-scores-array.component';
+import { provideStore } from '@ngxs/store';
+import { Store } from '@ngxs/store';
+import { MatButtonModule } from '@angular/material/button';
+import { AbilityScoresSelectorComponent } from '../ability-scores-selector/ability-scores-selector.component';
+import { ResetAbilityPointsOperation } from '../../states/operations/operations.actions';
+import { By } from '@angular/platform-browser';
+import { OperationsState } from '../../states/operations/operations.state';
 
-// describe('AbilityScoresArrayComponent', () => {
-//   let component: AbilityScoresArrayComponent;
-//   let fixture: ComponentFixture<AbilityScoresArrayComponent>;
-//   let store: MockStore;
+describe('AbilityScoresArrayComponent', () => {
+  let component: AbilityScoresArrayComponent;
+  let fixture: ComponentFixture<AbilityScoresArrayComponent>;
+  let store: Store;
 
-//   const initialState = {
-//     availablePoints: 27,
-//     strAbilityBonus: {
-//       ability_score: {
-//         index: 'str',
-//         name: 'STR',
-//         url: '/api/ability-scores/str',
-//       },
-//       bonus: 8
-//     },
-//     conAbilityBonus: {
-//       ability_score: {
-//         index: 'con',
-//         name: 'CON',
-//         url: '/api/ability-scores/con',
-//       },
-//       bonus: 8
-//     },
-//     dexAbilityBonus: {
-//       ability_score: {
-//         index: 'dex',
-//         name: 'DEX',
-//         url: '/api/ability-scores/dex',
-//       },
-//       bonus: 8
-//     },
-//     intAbilityBonus: {
-//       ability_score: {
-//         index: 'int',
-//         name: 'INT',
-//         url: '/api/ability-scores/int',
-//       },
-//       bonus: 8
-//     },
-//     wisAbilityBonus: {
-//       ability_score: {
-//         index: 'wis',
-//         name: 'WIS',
-//         url: '/api/ability-scores/wis',
-//       },
-//       bonus: 8
-//     },
-//     chaAbilityBonus: {
-//       ability_score: {
-//         index: 'cha',
-//         name: 'CHA',
-//         url: '/api/ability-scores/cha',
-//       },
-//       bonus: 8
-//     },
-//     abilityBonuses: [{
-//       ability_score: {
-//         index: 'str',
-//         name: 'STR',
-//         url: '/api/ability-scores/str',
-//       },
-//       bonus: 0
-//     },
-//     {
-//       ability_score: {
-//         index: 'con',
-//         name: 'CON',
-//         url: '/api/ability-scores/con',
-//       },
-//       bonus: 0
-//     },
-//     {
-//       ability_score: {
-//         index: 'dex',
-//         name: 'DEX',
-//         url: '/api/ability-scores/dex',
-//       },
-//       bonus: 0
-//     },
-//     {
-//       ability_score: {
-//         index: 'int',
-//         name: 'INT',
-//         url: '/api/ability-scores/int',
-//       },
-//       bonus: 0
-//     },
-//     {
-//       ability_score: {
-//         index: 'wis',
-//         name: 'WIS',
-//         url: '/api/ability-scores/wis',
-//       },
-//       bonus: 0
-//     },
-//     {
-//       ability_score: {
-//         index: 'cha',
-//         name: 'CHA',
-//         url: '/api/ability-scores/cha',
-//       },
-//       bonus: 0
-//     },]
-//   };
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [MatButtonModule],
+      providers: [
+        provideStore([OperationsState])
+      ]
+    }).compileComponents();
 
-//   beforeEach(() =>
-//     MockBuilder(AbilityScoresArrayComponent)
-//     .mock(AbilityScoresSelectorComponent)
-//     .provide(
-//       provideMockStore({ initialState: initialState }),
-//     )
-//   );
+    store = TestBed.inject(Store);
+    fixture = TestBed.createComponent(AbilityScoresArrayComponent);
+    component = fixture.componentInstance;
 
-//   beforeEach(() => {
-//     fixture = MockRender(AbilityScoresArrayComponent);
-//     component = ngMocks.findInstance(
-//       AbilityScoresArrayComponent
-//     );
-//     store = TestBed.inject(MockStore);
+    spyOn(store, 'dispatch');
+  });
 
-//     store.overrideSelector(selectAvailablePoints, 10);
-//     store.overrideSelector(selectStrAbilityBonus, initialState.strAbilityBonus);
-//     store.overrideSelector(selectConAbilityBonus, initialState.conAbilityBonus);
-//     store.overrideSelector(selectDexAbilityBonus, initialState.dexAbilityBonus);
-//     store.overrideSelector(selectIntAbilityBonus, initialState.intAbilityBonus);
-//     store.overrideSelector(selectWisAbilityBonus, initialState.wisAbilityBonus);
-//     store.overrideSelector(selectChaAbilityBonus, initialState.chaAbilityBonus);
-//     store.overrideSelector(selectCurrentAbilityBonuses, initialState.abilityBonuses);
-//     component.ngOnInit();
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-//     fixture.detectChanges();
-//   });
+  it('should display available points', () => {
+    fixture.detectChanges();
+    const availablePointsElement = fixture.debugElement.query(By.css('.header-info')).nativeElement;
+    expect(availablePointsElement.textContent).toContain('27');
+  });
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
+  it('should call resetAvailablePoints method and dispatch action', () => {
+    fixture.detectChanges();
+    component.resetAvailablePoints();
+    expect(store.dispatch).toHaveBeenCalledWith(new ResetAbilityPointsOperation());
+  });
 
-//   it('should display available points', () => {
-//     const availablePointsElement = ngMocks.find('.available-points').nativeElement;
-//     expect(availablePointsElement.textContent).toContain('10');
-//   });
+  it('should display ability scores correctly', () => {
+    fixture.detectChanges();
 
-//   it('should display strength ability bonus', () => {
-//     component.strAbilityBonus$.subscribe(value => {
-//       expect(value.ability_score.name).toBe('STR');
-//       expect(value.bonus).toBe(0);
-//     });
-//   });
+    const abilitySelectors = fixture.debugElement.queryAll(By.directive(AbilityScoresSelectorComponent));
+    expect(abilitySelectors.length).toBe(6);
 
-//   it('should increment available points on increment call', () => {
-//     const dispatchSpy = jest.spyOn(store, 'dispatch');
-//     component.increment();
-//     expect(dispatchSpy).toHaveBeenCalledWith(draftCharacterActions.increaseAbilityPoints());
-//   });
+    const strSelector = abilitySelectors[0].componentInstance as AbilityScoresSelectorComponent;
+    expect(strSelector.abilityName).toBe('STR');
+    expect(strSelector.abilityIndex).toBe('str');
+    expect(strSelector.abilityScore).toBe(8);
+    expect(strSelector.racialBonus).toBe(0);
+    expect(strSelector.abilityMod).toBe('(-1)');
+  });
 
-//   it('should decrement available points on decrement call', () => {
-//     const dispatchSpy = jest.spyOn(store, 'dispatch');
-//     component.decrement();
-//     expect(dispatchSpy).toHaveBeenCalledWith(draftCharacterActions.decreaseAbilityPoints());
-//   });
-
-//   it('should reset available points on resetAvailablePoints call', () => {
-//     const dispatchSpy = jest.spyOn(store, 'dispatch');
-//     component.resetAvailablePoints();
-//     expect(dispatchSpy).toHaveBeenCalledWith(draftCharacterActions.resetAbilityPoints());
-//   });
-
-//   it('should calculate ability modifier correctly', () => {
-//     const result = component.getBonusCaracteristique(14);
-//     expect(result).toBe('(+2)');
-//   });
-// });
+  it('should calculate ability modifier correctly', () => {
+    expect(component.getBonusCaracteristique(14)).toBe('(+2)');
+    expect(component.getBonusCaracteristique(8)).toBe('(-1)');
+  });
+});
