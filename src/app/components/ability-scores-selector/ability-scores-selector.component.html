@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <div class="race-info">
+    <span>{{abilityName}}</span>
+    <span>+{{ racialBonus }}</span>
+  </div>
+  <div class="button-wrapper">
+    <button mat-icon-button (click)="decrement(abilityIndex)" [disabled]="abilityScore <= minValue">
+      <mat-icon>remove_circle</mat-icon>
+    </button>
+  </div>
+  <div class="calculated-value-wrapper">
+    <span>{{ abilityScore }}</span>
+  </div>
+  <div class="button-wrapper">
+    <button mat-icon-button (click)="increment(abilityIndex)" [disabled]="abilityScore >= maxValue || disableAddButton">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+  <div class="mod-value-wrapper">
+    <span>{{ abilityMod }}</span>
+  </div>
+</div>

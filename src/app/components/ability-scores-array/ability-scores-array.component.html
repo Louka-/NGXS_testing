@@ -1,0 +1,67 @@
+@let strAbilityBonus = (strAbilityBonus$ | async)!;
+@let conAbilityBonus = (conAbilityBonus$ | async)!;
+@let dexAbilityBonus = (dexAbilityBonus$ | async)!;
+@let intAbilityBonus = (intAbilityBonus$ | async)!;
+@let wisAbilityBonus = (wisAbilityBonus$ | async)!;
+@let chaAbilityBonus = (chaAbilityBonus$ | async)!;
+@let availablePoints = (availablePoints$ | async)!;
+
+<div class="wrapper">
+  <div class="header">
+    <span class="header-title">Available Points:</span>
+    <span class="header-info">{{availablePoints}}</span>
+  </div>
+  <div class="content">
+    <ability-scores-selector
+      [abilityName]="strAbilityBonus.ability_score.name"
+      [abilityIndex]="strAbilityBonus.ability_score.index"
+      [abilityScore]="strAbilityBonus.bonus"
+      [racialBonus]="strAbilityBonus.racialBonus"
+      [abilityMod]="strAbilityBonus.abilityMod"
+      [disableAddButton]="!availablePoints"
+    ></ability-scores-selector>
+    <ability-scores-selector
+      [abilityName]="conAbilityBonus.ability_score.name"
+      [abilityIndex]="conAbilityBonus.ability_score.index"
+      [abilityScore]="conAbilityBonus.bonus"
+      [racialBonus]="conAbilityBonus.racialBonus"
+      [abilityMod]="conAbilityBonus.abilityMod"
+      [disableAddButton]="!availablePoints"
+    ></ability-scores-selector>
+    <ability-scores-selector
+      [abilityName]="dexAbilityBonus.ability_score.name"
+      [abilityIndex]="dexAbilityBonus.ability_score.index"
+      [abilityScore]="dexAbilityBonus.bonus"
+      [racialBonus]="dexAbilityBonus.racialBonus"
+      [abilityMod]="dexAbilityBonus.abilityMod"
+      [disableAddButton]="!availablePoints"
+    ></ability-scores-selector>
+    <ability-scores-selector
+      [abilityName]="intAbilityBonus.ability_score.name"
+      [abilityIndex]="intAbilityBonus.ability_score.index"
+      [abilityScore]="intAbilityBonus.bonus"
+      [racialBonus]="intAbilityBonus.racialBonus"
+      [abilityMod]="intAbilityBonus.abilityMod"
+      [disableAddButton]="!availablePoints"
+    ></ability-scores-selector>
+    <ability-scores-selector
+      [abilityName]="wisAbilityBonus.ability_score.name"
+      [abilityIndex]="wisAbilityBonus.ability_score.index"
+      [abilityScore]="wisAbilityBonus.bonus"
+      [racialBonus]="wisAbilityBonus.racialBonus"
+      [abilityMod]="wisAbilityBonus.abilityMod"
+      [disableAddButton]="!availablePoints"
+    ></ability-scores-selector>
+    <ability-scores-selector
+      [abilityName]="chaAbilityBonus.ability_score.name"
+      [abilityIndex]="chaAbilityBonus.ability_score.index"
+      [abilityScore]="chaAbilityBonus.bonus"
+      [racialBonus]="chaAbilityBonus.racialBonus"
+      [abilityMod]="chaAbilityBonus.abilityMod"
+      [disableAddButton]="!availablePoints"
+    ></ability-scores-selector>
+  </div>
+  <div class="footer">
+    <button mat-button (click)="resetAvailablePoints()">Reset Points</button>
+  </div>
+</div>

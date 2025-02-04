@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AbilityScoresArrayComponent } from './components/ability-scores-array/ability-scores-array.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [AbilityScoresArrayComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

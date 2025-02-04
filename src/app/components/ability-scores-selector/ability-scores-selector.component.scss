@@ -1,0 +1,74 @@
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  div {
+    height: 40px;
+  }
+
+  .race-info {
+    font-weight: 400;
+    width: 75px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    span:nth-child(1){
+      color: red;
+      font-weight: 500;
+    }
+    span:nth-child(2){
+      font-style: italic;
+    }
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    button:disabled {
+      background-color: lightgray;
+      cursor: not-allowed;
+    }
+    button.mdc-icon-button.mat-mdc-icon-button.mat-unthemed.mat-mdc-button-base {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      cursor: pointer;
+      mat-icon {
+        color: goldenrod;
+      }
+    }
+  }
+
+  .calculated-value-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: chartreuse;
+    background-color: darkgreen;
+    width: 50px;
+    border-width:2px;
+    border-style:solid;
+    border-radius: 15px;
+  }
+
+  .mod-value-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+    }
+  }
+}
+
+
